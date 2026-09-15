@@ -1,0 +1,251 @@
+request_id,amount_safe_to_pay,affordability_status,recommended_payment_method,payment_plan,earliest_date_for_full_payment,spending_changes_needed,decision_explanation
+request_26,15656000,affordable_now,full_payment,2025-08-03:15656000,2025-08-03,none,Pay 15656000 IDR in full today. The selected plan keeps the forecast above the 24768300 IDR minimum.
+request_27,6670,affordable_now,full_payment,2026-07-05:6670,2026-07-05,none,Pay 6670 ZAR in full today. The selected plan keeps the forecast above the 20500 ZAR minimum.
+request_28,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1302.4 EUR while maintaining the 1100 EUR minimum.
+request_29,9486.19,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 51524 ZAR while maintaining the 28300 ZAR minimum.
+request_30,775.2,affordable_with_plan,installments,2026-04-06:268.74|2026-05-06:268.74|2026-06-05:268.74,2026-04-06,none,Use 3 supplied installments of 268.74 USD. The selected plan keeps the forecast above the 900 USD minimum.
+request_31,1696704.54,affordable_later,wait,2024-11-15:18164000,2024-11-15,none,"Wait until 2024-11-15, then pay in full. The selected plan keeps the forecast above the 16588900 IDR minimum."
+request_32,5090.33,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 40018 ZAR while maintaining the 35700 ZAR minimum.
+request_33,26912.04,affordable_later,wait,2026-03-15:118000,2026-03-15,none,"Wait until 2026-03-15, then pay in full. The selected plan keeps the forecast above the 102100 INR minimum."
+request_34,129400,affordable_now,full_payment,2024-12-04:129400,2024-12-04,none,Pay 129400 INR in full today. The selected plan keeps the forecast above the 138500 INR minimum.
+request_35,18794.53,affordable_later,wait,2026-01-15:212000,2026-01-15,none,"Wait until 2026-01-15, then pay in full. The selected plan keeps the forecast above the 106400 INR minimum."
+request_36,518.62,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 3954 USD while maintaining the 2400 USD minimum.
+request_37,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 14649000 IDR while maintaining the 17056200 IDR minimum.
+request_38,202.57,affordable_later,wait,2025-10-15:971.3,2025-10-15,none,"Wait until 2025-10-15, then pay in full. The selected plan keeps the forecast above the 400 EUR minimum."
+request_39,47121.66,affordable_later,wait,2026-06-15:208600,2026-06-15,none,"Wait until 2026-06-15, then pay in full. The selected plan keeps the forecast above the 213400 INR minimum."
+request_40,194.88,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1290.3 EUR while maintaining the 1500 EUR minimum.
+request_41,7537666.42,affordable_later,wait,2026-01-15:38760000,2026-01-15,none,"Wait until 2026-01-15, then pay in full. The selected plan keeps the forecast above the 25366600 IDR minimum."
+request_42,52100,affordable_now,full_payment,2026-01-05:52100,2026-01-05,none,Pay 52100 INR in full today. The selected plan keeps the forecast above the 113100 INR minimum.
+request_43,7942206.38,affordable_later,wait,2024-11-15:43339000,2024-11-15,none,"Wait until 2024-11-15, then pay in full. The selected plan keeps the forecast above the 21398000 IDR minimum."
+request_44,25186.45,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 95800 INR while maintaining the 82900 INR minimum.
+request_45,2929647.63,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 21983000 IDR while maintaining the 11149800 IDR minimum.
+request_46,30984.32,not_affordable,not_recommended,none,2025-01-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 49450 INR while maintaining the 84000 INR minimum.
+request_47,38114000,affordable_now,full_payment,2025-05-05:38114000,2025-05-05,none,Pay 38114000 IDR in full today. The selected plan keeps the forecast above the 30049000 IDR minimum.
+request_48,45700,affordable_now,full_payment,2026-07-25:45700,2026-07-25,none,Pay 45700 INR in full today. The selected plan keeps the forecast above the 71300 INR minimum.
+request_49,11369501.86,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 34333000 IDR while maintaining the 20275700 IDR minimum.
+request_50,43900,affordable_now,full_payment,2025-08-06:43900,2025-08-06,none,Pay 43900 INR in full today. The selected plan keeps the forecast above the 99700 INR minimum.
+request_51,2191000,affordable_now,full_payment,2026-01-03:2191000,2026-01-03,none,Pay 2191000 IDR in full today. The selected plan keeps the forecast above the 7811000 IDR minimum.
+request_52,18239.91,affordable_later,wait,2024-06-15:28870,2024-06-15,none,"Wait until 2024-06-15, then pay in full. The selected plan keeps the forecast above the 41500 INR minimum."
+request_53,394.01,not_affordable,not_recommended,none,2026-01-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1699.2 USD while maintaining the 2100 USD minimum.
+request_54,842.27,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 121528 ZAR while maintaining the 37000 ZAR minimum.
+request_55,123949.52,not_affordable,not_recommended,none,2026-08-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 218600 INR while maintaining the 124300 INR minimum.
+request_56,174.61,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 881.56 USD while maintaining the 2100 USD minimum.
+request_57,11964.4,affordable_later,wait,2026-06-15:61446,2026-06-15,none,"Wait until 2026-06-15, then pay in full. The selected plan keeps the forecast above the 42700 ZAR minimum."
+request_58,16226000,affordable_now,full_payment,2024-12-07:16226000,2024-12-07,none,Pay 16226000 IDR in full today. The selected plan keeps the forecast above the 14433900 IDR minimum.
+request_59,140600,affordable_with_plan,installments,2025-05-07:48741.33|2025-06-04:48741.33|2025-07-02:48741.33,2025-05-04,none,Use 3 supplied installments of 48741.33 INR. The selected plan keeps the forecast above the 132600 INR minimum.
+request_60,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 199.89 USD while maintaining the 400 USD minimum.
+request_61,29062,affordable_with_plan,installments,2024-03-17:10074.83|2024-04-17:10074.83|2024-05-18:10074.83,2024-03-03,none,Use 3 supplied installments of 10074.83 ZAR. The selected plan keeps the forecast above the 36700 ZAR minimum.
+request_62,404.23,affordable_now,full_payment,2025-08-05:404.23,2025-08-05,none,Pay 404.23 USD in full today. The selected plan keeps the forecast above the 1300 USD minimum.
+request_63,46509.66,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 343900 INR while maintaining the 153500 INR minimum.
+request_64,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 63700 INR while maintaining the 36100 INR minimum.
+request_65,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 54340 ZAR while maintaining the 15500 ZAR minimum.
+request_66,22200,affordable_now,full_payment,2026-04-03:22200,2026-04-03,none,Pay 22200 INR in full today. The selected plan keeps the forecast above the 80700 INR minimum.
+request_67,222.92,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2094 USD while maintaining the 1200 USD minimum.
+request_68,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2091.6 USD while maintaining the 1500 USD minimum.
+request_69,466.68,affordable_with_plan,full_payment,2026-01-04:529.1,2026-03-15,reduce_to:event_6407:16.4|stop:event_6405,Use the full_payment plan. Required flexible-spending changes: reduce_to:event_6407:16.4|stop:event_6405. The selected plan keeps the forecast above the 700 EUR minimum.
+request_70,48080.83,affordable_later,wait,2025-02-15:243900,2025-02-15,none,"Wait until 2025-02-15, then pay in full. The selected plan keeps the forecast above the 115000 INR minimum."
+request_71,25447.74,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 21451000 IDR while maintaining the 8884800 IDR minimum.
+request_72,11255.38,affordable_with_plan,full_payment,2026-07-05:11330,2026-07-15,reduce_to:event_6749:410.3,Use the full_payment plan. Required flexible-spending changes: reduce_to:event_6749:410.3. The selected plan keeps the forecast above the 12200 ZAR minimum.
+request_73,71400,affordable_now,full_payment,2023-01-20:71400,2023-01-20,none,Pay 71400 INR in full today. The selected plan keeps the forecast above the 103200 INR minimum.
+request_74,5010,affordable_now,full_payment,2025-08-04:5010,2025-08-04,none,Pay 5010 ZAR in full today. The selected plan keeps the forecast above the 21900 ZAR minimum.
+request_75,28270,affordable_with_plan,installments,2026-04-09:9800.27|2026-05-09:9800.27|2026-06-08:9800.27,2026-04-06,none,Use 3 supplied installments of 9800.27 ZAR. The selected plan keeps the forecast above the 39000 ZAR minimum.
+request_76,623.75,not_affordable,not_recommended,none,2024-08-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 4455.6 USD while maintaining the 1800 USD minimum.
+request_77,60700,affordable_now,full_payment,2025-11-05:60700,2025-11-05,none,Pay 60700 INR in full today. The selected plan keeps the forecast above the 82200 INR minimum.
+request_78,47940.78,affordable_with_plan,full_payment,2025-10-02:50200,2025-10-15,reduce_to:event_7224:805|reduce_to:event_7225:1480,Use the full_payment plan. Required flexible-spending changes: reduce_to:event_7224:805|reduce_to:event_7225:1480. The selected plan keeps the forecast above the 55200 INR minimum.
+request_79,258,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2151.6 EUR while maintaining the 1000 EUR minimum.
+request_80,63553.69,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 217500 INR while maintaining the 121300 INR minimum.
+request_81,1962.9,affordable_with_plan,full_payment,2026-07-03:2076,2026-09-15,reduce_to:event_7636:37.5,Use the full_payment plan. Required flexible-spending changes: reduce_to:event_7636:37.5. The selected plan keeps the forecast above the 1600 USD minimum.
+request_82,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1405.2 USD while maintaining the 1100 USD minimum.
+request_83,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 156200 INR while maintaining the 37800 INR minimum.
+request_84,27705.57,affordable_later,wait,2026-06-15:95400,2026-06-15,none,"Wait until 2026-06-15, then pay in full. The selected plan keeps the forecast above the 91300 INR minimum."
+request_85,177894.71,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 19304000 IDR while maintaining the 6396300 IDR minimum.
+request_86,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 46300 INR while maintaining the 84900 INR minimum.
+request_87,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 487900 INR while maintaining the 185900 INR minimum.
+request_88,10420.27,affordable_with_plan,installments,2024-06-14:9045.23|2024-07-15:9045.23|2024-08-15:9045.23,2024-06-15,none,Use 3 supplied installments of 9045.23 ZAR. The selected plan keeps the forecast above the 25800 ZAR minimum.
+request_89,9094837.3,not_affordable,not_recommended,none,2026-01-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 13756000 IDR while maintaining the 12534700 IDR minimum.
+request_90,2560,affordable_now,full_payment,2026-07-06:2560,2026-07-06,none,Pay 2560 ZAR in full today. The selected plan keeps the forecast above the 7600 ZAR minimum.
+request_91,210.76,affordable_later,wait,2024-11-15:1927.2,2024-11-15,none,"Wait until 2024-11-15, then pay in full. The selected plan keeps the forecast above the 2100 EUR minimum."
+request_92,34034,affordable_now,full_payment,2025-02-05:34034,2025-02-05,none,Pay 34034 ZAR in full today. The selected plan keeps the forecast above the 28100 ZAR minimum.
+request_93,1729.2,affordable_now,full_payment,2026-04-07:1729.2,2026-04-07,none,Pay 1729.2 USD in full today. The selected plan keeps the forecast above the 1900 USD minimum.
+request_94,572,affordable_now,full_payment,2024-12-04:572,2024-12-04,none,Pay 572 EUR in full today. The selected plan keeps the forecast above the 600 EUR minimum.
+request_95,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 553000 INR while maintaining the 145500 INR minimum.
+request_96,69082.33,not_affordable,not_recommended,none,2026-03-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 90200 INR while maintaining the 56500 INR minimum.
+request_97,1180.45,affordable_with_plan,installments,2024-03-19:8145.28|2024-04-19:8145.28|2024-05-20:8145.28,2024-04-15,none,Use 3 supplied installments of 8145.28 ZAR. The selected plan keeps the forecast above the 29700 ZAR minimum.
+request_98,8169.28,affordable_later,wait,2025-10-15:27148,2025-10-15,none,"Wait until 2025-10-15, then pay in full. The selected plan keeps the forecast above the 30000 ZAR minimum."
+request_99,16239.12,affordable_with_plan,full_payment,2026-07-04:18062,2026-07-15,reduce_to:event_9188:525.8|reduce_to:event_9232:1065.9,Use the full_payment plan. Required flexible-spending changes: reduce_to:event_9188:525.8|reduce_to:event_9232:1065.9. The selected plan keeps the forecast above the 49100 ZAR minimum.
+request_100,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 37114 ZAR while maintaining the 32500 ZAR minimum.
+request_101,143500,affordable_now,full_payment,2025-11-03:143500,2025-11-03,none,Pay 143500 INR in full today. The selected plan keeps the forecast above the 187400 INR minimum.
+request_102,1716,affordable_with_plan,installments,2026-04-05:594.88|2026-05-05:594.88|2026-06-04:594.88,2026-04-05,none,Use 3 supplied installments of 594.88 EUR. The selected plan keeps the forecast above the 900 EUR minimum.
+request_103,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 368300 INR while maintaining the 125500 INR minimum.
+request_104,15711.4,affordable_later,wait,2025-04-15:17204,2025-04-15,none,"Wait until 2025-04-15, then pay in full. The selected plan keeps the forecast above the 24700 ZAR minimum."
+request_105,53500,affordable_now,full_payment,2026-06-08:53500,2026-06-08,none,Pay 53500 INR in full today. The selected plan keeps the forecast above the 73900 INR minimum.
+request_106,436.93,affordable_later,wait,2025-02-15:2207.7,2025-02-15,none,"Wait until 2025-02-15, then pay in full. The selected plan keeps the forecast above the 1200 EUR minimum."
+request_107,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2534.4 EUR while maintaining the 1600 EUR minimum.
+request_108,1042.35,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 55308 ZAR while maintaining the 24100 ZAR minimum.
+request_109,460.92,not_affordable,not_recommended,none,2024-05-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1863.4 EUR while maintaining the 1700 EUR minimum.
+request_110,22352,affordable_with_plan,installments,2025-08-06:7748.69|2025-09-03:7748.69|2025-10-01:7748.69,2025-08-06,none,Use 3 supplied installments of 7748.69 ZAR. The selected plan keeps the forecast above the 11200 ZAR minimum.
+request_111,16625000,affordable_now,full_payment,2026-04-03:16625000,2026-04-03,none,Pay 16625000 IDR in full today. The selected plan keeps the forecast above the 23022800 IDR minimum.
+request_112,213.78,affordable_with_plan,full_payment,2024-06-05:271.7,2024-08-15,reduce_to:event_10400:13,Use the full_payment plan. Required flexible-spending changes: reduce_to:event_10400:13. The selected plan keeps the forecast above the 500 EUR minimum.
+request_113,19947.39,affordable_later,wait,2026-09-15:36500,2026-09-15,none,"Wait until 2026-09-15, then pay in full. The selected plan keeps the forecast above the 82300 INR minimum."
+request_114,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 65300 INR while maintaining the 113400 INR minimum.
+request_115,13816.98,affordable_later,wait,2024-11-15:80500,2024-11-15,none,"Wait until 2024-11-15, then pay in full. The selected plan keeps the forecast above the 38800 INR minimum."
+request_116,2534.28,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 241200 INR while maintaining the 80300 INR minimum.
+request_117,828.57,not_affordable,not_recommended,none,2026-07-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 880 EUR while maintaining the 1000 EUR minimum.
+request_118,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 738.1 EUR while maintaining the 600 EUR minimum.
+request_119,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 203500 INR while maintaining the 151200 INR minimum.
+request_120,7714000,affordable_now,full_payment,2026-04-06:7714000,2026-04-06,none,Pay 7714000 IDR in full today. The selected plan keeps the forecast above the 20050300 IDR minimum.
+request_121,633.6,affordable_now,full_payment,2024-03-03:633.6,2024-03-03,none,Pay 633.6 USD in full today. The selected plan keeps the forecast above the 800 USD minimum.
+request_122,20558000,affordable_with_plan,installments,2025-08-05:7126773.33|2025-09-02:7126773.33|2025-09-30:7126773.33,2025-08-05,none,Use 3 supplied installments of 7126773.33 IDR. The selected plan keeps the forecast above the 12588500 IDR minimum.
+request_123,4076000,affordable_now,full_payment,2026-01-07:4076000,2026-01-07,none,Pay 4076000 IDR in full today. The selected plan keeps the forecast above the 18091200 IDR minimum.
+request_124,1370.32,affordable_with_plan,installments,2024-06-11:1076.12|2024-07-12:1076.12|2024-08-12:1076.12,2024-07-15,none,Use 3 supplied installments of 1076.12 EUR. The selected plan keeps the forecast above the 1600 EUR minimum.
+request_125,5349.41,not_affordable,not_recommended,none,2025-11-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 6468 ZAR while maintaining the 11300 ZAR minimum.
+request_126,159600,affordable_now,full_payment,2026-07-03:159600,2026-07-03,none,Pay 159600 INR in full today. The selected plan keeps the forecast above the 129700 INR minimum.
+request_127,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 23980 ZAR while maintaining the 41000 ZAR minimum.
+request_128,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 25168 ZAR while maintaining the 42600 ZAR minimum.
+request_129,100.62,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2668.8 USD while maintaining the 800 USD minimum.
+request_130,302.73,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1978.8 USD while maintaining the 1400 USD minimum.
+request_131,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1855.2 USD while maintaining the 1100 USD minimum.
+request_132,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 379.86 USD while maintaining the 1100 USD minimum.
+request_133,15770000,not_affordable,not_recommended,none,2024-03-07,none,Do not proceed by the requested deadline. The forecast cannot safely complete 15770000 IDR while maintaining the 9986200 IDR minimum.
+request_134,3744801.43,affordable_later,wait,2025-10-15:21831000,2025-10-15,none,"Wait until 2025-10-15, then pay in full. The selected plan keeps the forecast above the 15902500 IDR minimum."
+request_135,304.8,affordable_now,full_payment,2026-07-06:304.8,2026-07-06,none,Pay 304.8 USD in full today. The selected plan keeps the forecast above the 500 USD minimum.
+request_136,480.67,not_affordable,not_recommended,none,2024-06-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 560.4 USD while maintaining the 1100 USD minimum.
+request_137,4607.29,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 80100 INR while maintaining the 71800 INR minimum.
+request_138,1090.28,affordable_with_plan,partial_payment,2026-04-07:1090.28|2026-04-15:166.66,2026-04-15,none,Pay 1090.28 EUR today and the remainder on 2026-04-15. The selected plan keeps the forecast above the 2300 EUR minimum.
+request_139,1170.09,not_affordable,not_recommended,none,2024-11-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2316 USD while maintaining the 1500 USD minimum.
+request_140,804.52,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 62832 ZAR while maintaining the 21600 ZAR minimum.
+request_141,17403.94,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 171600 INR while maintaining the 67300 INR minimum.
+request_142,1263.6,affordable_now,full_payment,2024-12-05:1263.6,2024-12-05,none,Pay 1263.6 USD in full today. The selected plan keeps the forecast above the 1700 USD minimum.
+request_143,2037.3,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 12584 ZAR while maintaining the 11300 ZAR minimum.
+request_144,142.49,affordable_with_plan,full_payment,2026-07-04:233.34,2026-09-15,reduce_to:event_13306:17.5|stop:event_13239,Use the full_payment plan. Required flexible-spending changes: reduce_to:event_13306:17.5|stop:event_13239. The selected plan keeps the forecast above the 600 USD minimum.
+request_145,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 217400 INR while maintaining the 155400 INR minimum.
+request_146,13241.69,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 449400 INR while maintaining the 108600 INR minimum.
+request_147,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1129.7 EUR while maintaining the 900 EUR minimum.
+request_148,6329.51,not_affordable,not_recommended,none,2024-08-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 22242 ZAR while maintaining the 20000 ZAR minimum.
+request_149,23720.97,affordable_with_plan,installments,2025-11-18:12706.03|2025-12-16:12706.03|2026-01-13:12706.03,2025-12-15,none,Use 3 supplied installments of 12706.03 ZAR. The selected plan keeps the forecast above the 42100 ZAR minimum.
+request_150,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 496.1 EUR while maintaining the 700 EUR minimum.
+request_151,26999000,affordable_now,full_payment,2024-09-03:26999000,2024-09-03,none,Pay 26999000 IDR in full today. The selected plan keeps the forecast above the 31633600 IDR minimum.
+request_152,10230.07,not_affordable,not_recommended,none,2025-04-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 13882 ZAR while maintaining the 11900 ZAR minimum.
+request_153,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2830.8 USD while maintaining the 1400 USD minimum.
+request_154,1625.8,affordable_with_plan,installments,2024-12-04:563.61|2025-01-04:563.61|2025-02-04:563.61,2024-12-04,none,Use 3 supplied installments of 563.61 EUR. The selected plan keeps the forecast above the 1300 EUR minimum.
+request_155,30326.63,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 112500 INR while maintaining the 56300 INR minimum.
+request_156,10941.65,affordable_later,wait,2026-05-15:43076,2026-05-15,none,"Wait until 2026-05-15, then pay in full. The selected plan keeps the forecast above the 26900 ZAR minimum."
+request_157,4100219.28,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 23503000 IDR while maintaining the 15714100 IDR minimum.
+request_158,242600,affordable_with_plan,installments,2025-08-07:84101.33|2025-09-04:84101.33|2025-10-02:84101.33,2025-08-07,none,Use 3 supplied installments of 84101.33 INR. The selected plan keeps the forecast above the 131400 INR minimum.
+request_159,13398,affordable_now,full_payment,2026-01-04:13398,2026-01-04,none,Pay 13398 ZAR in full today. The selected plan keeps the forecast above the 8700 ZAR minimum.
+request_160,550.49,affordable_with_plan,installments,2024-06-13:432.05|2024-07-14:432.05|2024-08-14:432.05,2024-07-15,none,Use 3 supplied installments of 432.05 EUR. The selected plan keeps the forecast above the 1200 EUR minimum.
+request_161,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 21204000 IDR while maintaining the 23010400 IDR minimum.
+request_162,666153.67,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 83923000 IDR while maintaining the 24161100 IDR minimum.
+request_163,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 19304000 IDR while maintaining the 26728700 IDR minimum.
+request_164,27018000,affordable_with_plan,installments,2025-02-11:9366240|2025-03-11:9366240|2025-04-08:9366240,2025-02-04,none,Use 3 supplied installments of 9366240 IDR. The selected plan keeps the forecast above the 29550500 IDR minimum.
+request_165,80600,affordable_now,full_payment,2026-04-06:80600,2026-04-06,none,Pay 80600 INR in full today. The selected plan keeps the forecast above the 95000 INR minimum.
+request_166,2907.6,affordable_with_plan,installments,2024-12-03:1007.97|2025-01-03:1007.97|2025-02-03:1007.97,2024-12-03,none,Use 3 supplied installments of 1007.97 USD. The selected plan keeps the forecast above the 1700 USD minimum.
+request_167,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 43802 ZAR while maintaining the 31200 ZAR minimum.
+request_168,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 49380 INR while maintaining the 114400 INR minimum.
+request_169,41976,affordable_now,full_payment,2024-03-04:41976,2024-03-04,none,Pay 41976 ZAR in full today. The selected plan keeps the forecast above the 18700 ZAR minimum.
+request_170,28690863.43,not_affordable,not_recommended,none,2025-10-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 36936000 IDR while maintaining the 24715800 IDR minimum.
+request_171,16.63,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1878.8 EUR while maintaining the 500 EUR minimum.
+request_172,8532.01,affordable_with_plan,partial_payment,2024-06-05:8532.01|2024-07-15:1667.99,2024-07-15,none,Pay 8532.01 ZAR today and the remainder on 2024-07-15. The selected plan keeps the forecast above the 27200 ZAR minimum.
+request_173,51448.86,not_affordable,not_recommended,none,2026-01-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 113000 INR while maintaining the 79100 INR minimum.
+request_174,1146.2,affordable_with_plan,installments,2026-04-04:397.35|2026-05-04:397.35|2026-06-03:397.35,2026-04-04,none,Use 3 supplied installments of 397.35 EUR. The selected plan keeps the forecast above the 700 EUR minimum.
+request_175,2346.3,affordable_now,full_payment,2024-09-06:2346.3,2024-09-06,none,Pay 2346.3 EUR in full today. The selected plan keeps the forecast above the 1700 EUR minimum.
+request_176,340.15,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1239.7 EUR while maintaining the 600 EUR minimum.
+request_177,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1017.6 USD while maintaining the 1300 USD minimum.
+request_178,2938.1,affordable_with_plan,installments,2024-12-07:1018.54|2025-01-07:1018.54|2025-02-07:1018.54,2024-12-07,none,Use 3 supplied installments of 1018.54 EUR. The selected plan keeps the forecast above the 1400 EUR minimum.
+request_179,4429856.63,affordable_later,wait,2025-07-15:41648000,2025-07-15,none,"Wait until 2025-07-15, then pay in full. The selected plan keeps the forecast above the 41430800 IDR minimum."
+request_180,66500,affordable_now,full_payment,2026-07-06:66500,2026-07-06,none,Pay 66500 INR in full today. The selected plan keeps the forecast above the 37300 INR minimum.
+request_181,14.59,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 5059.2 USD while maintaining the 2000 USD minimum.
+request_182,14022.26,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 65714 ZAR while maintaining the 31100 ZAR minimum.
+request_183,24253976.9,affordable_with_plan,installments,2026-04-10:9313546.67|2026-05-10:9313546.67|2026-06-09:9313546.67,2026-05-15,none,Use 3 supplied installments of 9313546.67 IDR. The selected plan keeps the forecast above the 11878300 IDR minimum.
+request_184,6075.39,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 251900 INR while maintaining the 110800 INR minimum.
+request_185,269.08,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1257.3 EUR while maintaining the 1300 EUR minimum.
+request_186,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 26554 ZAR while maintaining the 22000 ZAR minimum.
+request_187,37179.51,affordable_later,wait,2024-11-15:187500,2024-11-15,none,"Wait until 2024-11-15, then pay in full. The selected plan keeps the forecast above the 128300 INR minimum."
+request_188,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2464 EUR while maintaining the 900 EUR minimum.
+request_189,488.4,affordable_now,full_payment,2026-07-04:488.4,2026-07-04,none,Pay 488.4 EUR in full today. The selected plan keeps the forecast above the 400 EUR minimum.
+request_190,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2557.5 EUR while maintaining the 1600 EUR minimum.
+request_191,664.4,affordable_now,full_payment,2025-05-03:664.4,2025-05-03,none,Pay 664.4 EUR in full today. The selected plan keeps the forecast above the 500 EUR minimum.
+request_192,148.62,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2046 USD while maintaining the 1000 USD minimum.
+request_193,0,not_affordable,not_recommended,none,2024-05-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1212.2 EUR while maintaining the 1000 EUR minimum.
+request_194,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 132800 INR while maintaining the 113600 INR minimum.
+request_195,41.78,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1170.4 EUR while maintaining the 700 EUR minimum.
+request_196,762.3,affordable_now,full_payment,2024-06-03:762.3,2024-06-03,none,Pay 762.3 EUR in full today. The selected plan keeps the forecast above the 500 EUR minimum.
+request_197,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 50939000 IDR while maintaining the 26245900 IDR minimum.
+request_198,185800,affordable_now,full_payment,2026-07-07:185800,2026-07-07,none,Pay 185800 INR in full today. The selected plan keeps the forecast above the 124300 INR minimum.
+request_199,23674000,affordable_with_plan,installments,2024-09-07:8206986.67|2024-10-08:8206986.67|2024-11-08:8206986.67,2024-09-04,none,Use 3 supplied installments of 8206986.67 IDR. The selected plan keeps the forecast above the 25359500 IDR minimum.
+request_200,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 21717000 IDR while maintaining the 20114600 IDR minimum.
+request_201,23997000,affordable_now,full_payment,2026-04-03:23997000,2026-04-03,none,Pay 23997000 IDR in full today. The selected plan keeps the forecast above the 17304500 IDR minimum.
+request_202,123900,affordable_now,full_payment,2024-12-05:123900,2024-12-05,none,Pay 123900 INR in full today. The selected plan keeps the forecast above the 147800 INR minimum.
+request_203,1442.1,affordable_with_plan,installments,2025-05-10:499.93|2025-06-07:499.93|2025-07-05:499.93,2025-05-07,none,Use 3 supplied installments of 499.93 EUR. The selected plan keeps the forecast above the 1400 EUR minimum.
+request_204,491.1,affordable_with_plan,full_payment,2026-01-04:588.74,2026-02-15,reduce_to:event_18827:33|stop:event_18761,Use the full_payment plan. Required flexible-spending changes: reduce_to:event_18827:33|stop:event_18761. The selected plan keeps the forecast above the 1300 EUR minimum.
+request_205,10621000,affordable_now,full_payment,2024-03-06:10621000,2024-03-06,none,Pay 10621000 IDR in full today. The selected plan keeps the forecast above the 13994300 IDR minimum.
+request_206,1404.7,affordable_with_plan,installments,2025-08-03:486.96|2025-08-31:486.96|2025-09-28:486.96,2025-08-03,none,Use 3 supplied installments of 486.96 EUR. The selected plan keeps the forecast above the 900 EUR minimum.
+request_207,3800.94,affordable_later,wait,2026-07-15:11830,2026-07-15,none,"Wait until 2026-07-15, then pay in full. The selected plan keeps the forecast above the 13600 ZAR minimum."
+request_208,2667257.53,affordable_later,wait,2024-06-15:4413000,2024-06-15,none,"Wait until 2024-06-15, then pay in full. The selected plan keeps the forecast above the 10470700 IDR minimum."
+request_209,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 56914 ZAR while maintaining the 18400 ZAR minimum.
+request_210,1098.4,affordable_with_plan,partial_payment,2026-04-06:1098.4|2026-04-15:261.62,2026-04-15,none,Pay 1098.4 USD today and the remainder on 2026-04-15. The selected plan keeps the forecast above the 2000 USD minimum.
+request_211,181.26,affordable_later,wait,2024-11-15:1788.6,2024-11-15,none,"Wait until 2024-11-15, then pay in full. The selected plan keeps the forecast above the 1500 EUR minimum."
+request_212,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 71934000 IDR while maintaining the 29579800 IDR minimum.
+request_213,3362.4,affordable_with_plan,installments,2026-01-21:1165.63|2026-02-20:1165.63|2026-03-22:1165.63,2026-01-07,none,Use 3 supplied installments of 1165.63 USD. The selected plan keeps the forecast above the 2100 USD minimum.
+request_214,44581.58,affordable_with_plan,partial_payment,2024-12-04:44581.58|2024-12-15:25168.42,2024-12-15,none,Pay 44581.58 INR today and the remainder on 2024-12-15. The selected plan keeps the forecast above the 174900 INR minimum.
+request_215,29986,affordable_with_plan,installments,2025-05-09:10395.15|2025-06-06:10395.15|2025-07-04:10395.15,2025-05-06,none,Use 3 supplied installments of 10395.15 ZAR. The selected plan keeps the forecast above the 15700 ZAR minimum.
+request_216,416.97,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 3332.4 USD while maintaining the 1800 USD minimum.
+request_217,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 37180 ZAR while maintaining the 26800 ZAR minimum.
+request_218,26111075.11,affordable_with_plan,installments,2025-08-07:21195893.33|2025-09-04:21195893.33|2025-10-02:21195893.33,2025-09-15,none,Use 3 supplied installments of 21195893.33 IDR. The selected plan keeps the forecast above the 34477200 IDR minimum.
+request_219,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1673.1 EUR while maintaining the 1100 EUR minimum.
+request_220,33.07,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 3118.5 EUR while maintaining the 1100 EUR minimum.
+request_221,109800,affordable_now,full_payment,2025-11-03:109800,2025-11-03,none,Pay 109800 INR in full today. The selected plan keeps the forecast above the 81500 INR minimum.
+request_222,34078,affordable_now,full_payment,2026-01-05:34078,2026-01-05,none,Pay 34078 ZAR in full today. The selected plan keeps the forecast above the 27300 ZAR minimum.
+request_223,898.7,affordable_now,full_payment,2024-09-07:898.7,2024-09-07,none,Pay 898.7 EUR in full today. The selected plan keeps the forecast above the 800 EUR minimum.
+request_224,8821362.69,not_affordable,not_recommended,none,2025-04-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 10327000 IDR while maintaining the 22187600 IDR minimum.
+request_225,8720362.97,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 22059000 IDR while maintaining the 17670700 IDR minimum.
+request_226,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 157000 INR while maintaining the 209400 INR minimum.
+request_227,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 259700 INR while maintaining the 62900 INR minimum.
+request_228,766176.39,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 63327000 IDR while maintaining the 26191200 IDR minimum.
+request_229,395.19,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1526.8 EUR while maintaining the 1000 EUR minimum.
+request_230,3537.6,affordable_now,full_payment,2025-08-06:3537.6,2025-08-06,none,Pay 3537.6 EUR in full today. The selected plan keeps the forecast above the 2000 EUR minimum.
+request_231,30982.04,affordable_with_plan,installments,2026-01-06:12378.08|2026-02-05:12378.08|2026-03-07:12378.08,2026-02-15,none,Use 3 supplied installments of 12378.08 ZAR. The selected plan keeps the forecast above the 24300 ZAR minimum.
+request_232,66.95,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1970.1 EUR while maintaining the 2400 EUR minimum.
+request_233,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 6241000 IDR while maintaining the 10365700 IDR minimum.
+request_234,203.58,affordable_later,wait,2026-09-15:1213.3,2026-09-15,none,"Wait until 2026-09-15, then pay in full. The selected plan keeps the forecast above the 700 EUR minimum."
+request_235,967.2,affordable_now,full_payment,2024-09-06:967.2,2024-09-06,none,Pay 967.2 USD in full today. The selected plan keeps the forecast above the 700 USD minimum.
+request_236,5676798.04,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 52383000 IDR while maintaining the 16768600 IDR minimum.
+request_237,23826000,affordable_now,full_payment,2026-04-05:23826000,2026-04-05,none,Pay 23826000 IDR in full today. The selected plan keeps the forecast above the 22431500 IDR minimum.
+request_238,663.6,affordable_with_plan,installments,2024-12-07:230.05|2025-01-07:230.05|2025-02-07:230.05,2024-12-07,none,Use 3 supplied installments of 230.05 USD. The selected plan keeps the forecast above the 700 USD minimum.
+request_239,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 642 USD while maintaining the 600 USD minimum.
+request_240,7171.33,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 101200 INR while maintaining the 52800 INR minimum.
+request_241,21052000,affordable_with_plan,installments,2024-03-17:7298026.67|2024-04-17:7298026.67|2024-05-18:7298026.67,2024-03-03,none,Use 3 supplied installments of 7298026.67 IDR. The selected plan keeps the forecast above the 19252000 IDR minimum.
+request_242,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1966.8 EUR while maintaining the 600 EUR minimum.
+request_243,17468,affordable_now,full_payment,2026-07-07:17468,2026-07-07,none,Pay 17468 ZAR in full today. The selected plan keeps the forecast above the 19900 ZAR minimum.
+request_244,49918,affordable_now,full_payment,2024-06-04:49918,2024-06-04,none,Pay 49918 ZAR in full today. The selected plan keeps the forecast above the 45900 ZAR minimum.
+request_245,21229.31,affordable_later,wait,2026-01-15:128500,2026-01-15,none,"Wait until 2026-01-15, then pay in full. The selected plan keeps the forecast above the 94600 INR minimum."
+request_246,64086,affordable_with_plan,installments,2026-04-03:22216.48|2026-05-03:22216.48|2026-06-02:22216.48,2026-04-03,none,Use 3 supplied installments of 22216.48 ZAR. The selected plan keeps the forecast above the 39300 ZAR minimum.
+request_247,1041.53,affordable_later,wait,2024-09-15:1059.3,2024-09-15,none,"Wait until 2024-09-15, then pay in full. The selected plan keeps the forecast above the 1300 EUR minimum."
+request_248,915.06,affordable_with_plan,partial_payment,2025-02-07:915.06|2025-04-15:1050.54,2025-04-15,none,Pay 915.06 USD today and the remainder on 2025-04-15. The selected plan keeps the forecast above the 1300 USD minimum.
+request_249,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 643.2 USD while maintaining the 600 USD minimum.
+request_250,14843.44,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 124278 ZAR while maintaining the 35300 ZAR minimum.
+request_251,1513.6,not_affordable,not_recommended,none,2025-05-03,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1513.6 EUR while maintaining the 1300 EUR minimum.
+request_252,4369241.05,affordable_later,wait,2026-09-15:28082000,2026-09-15,none,"Wait until 2026-09-15, then pay in full. The selected plan keeps the forecast above the 15152200 IDR minimum."
+request_253,1312.47,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2840.2 EUR while maintaining the 2300 EUR minimum.
+request_254,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 3535.2 USD while maintaining the 2500 USD minimum.
+request_255,3345000,affordable_now,full_payment,2026-04-06:3345000,2026-04-06,none,Pay 3345000 IDR in full today. The selected plan keeps the forecast above the 9813900 IDR minimum.
+request_256,143725.18,not_affordable,not_recommended,none,2024-08-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 218700 INR while maintaining the 168600 INR minimum.
+request_257,263.5,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 1352.4 USD while maintaining the 1600 USD minimum.
+request_258,1113.6,affordable_now,full_payment,2026-01-07:1113.6,2026-01-07,none,Pay 1113.6 USD in full today. The selected plan keeps the forecast above the 500 USD minimum.
+request_259,206,affordable_later,wait,2024-11-15:935,2024-11-15,none,"Wait until 2024-11-15, then pay in full. The selected plan keeps the forecast above the 600 EUR minimum."
+request_260,6141066.24,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 52079000 IDR while maintaining the 20727700 IDR minimum.
+request_261,1830.4,affordable_now,full_payment,2026-07-03:1830.4,2026-07-03,none,Pay 1830.4 EUR in full today. The selected plan keeps the forecast above the 1500 EUR minimum.
+request_262,9236000,affordable_now,full_payment,2024-12-05:9236000,2024-12-05,none,Pay 9236000 IDR in full today. The selected plan keeps the forecast above the 31018500 IDR minimum.
+request_263,7288.07,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 51546 ZAR while maintaining the 24100 ZAR minimum.
+request_264,22048.49,affordable_later,wait,2026-05-15:111300,2026-05-15,none,"Wait until 2026-05-15, then pay in full. The selected plan keeps the forecast above the 59500 INR minimum."
+request_265,45970,affordable_now,full_payment,2024-03-06:45970,2024-03-06,none,Pay 45970 INR in full today. The selected plan keeps the forecast above the 189700 INR minimum.
+request_266,757.72,not_affordable,not_recommended,none,2025-10-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 935 EUR while maintaining the 900 EUR minimum.
+request_267,1651.51,affordable_with_plan,installments,2026-01-08:667.33|2026-02-07:667.33|2026-03-09:667.33,2026-02-15,none,Use 3 supplied installments of 667.33 EUR. The selected plan keeps the forecast above the 1500 EUR minimum.
+request_268,1014.44,affordable_with_plan,installments,2024-06-14:841.22|2024-07-15:841.22|2024-08-15:841.22,2024-07-15,none,Use 3 supplied installments of 841.22 EUR. The selected plan keeps the forecast above the 1400 EUR minimum.
+request_269,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 15490 ZAR while maintaining the 23100 ZAR minimum.
+request_270,70.34,not_affordable,not_recommended,none,2026-09-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 3028.8 USD while maintaining the 1400 USD minimum.
+request_271,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 91300 INR while maintaining the 58200 INR minimum.
+request_272,0,not_affordable,not_recommended,none,,none,Do not proceed by the requested deadline. The forecast cannot safely complete 13585000 IDR while maintaining the 7508600 IDR minimum.
+request_273,9192347.08,affordable_with_plan,partial_payment,2026-04-07:9192347.08|2026-04-15:6668652.92,2026-04-15,none,Pay 9192347.08 IDR today and the remainder on 2026-04-15. The selected plan keeps the forecast above the 18774600 IDR minimum.
+request_274,2122.46,not_affordable,not_recommended,none,2025-01-15,none,Do not proceed by the requested deadline. The forecast cannot safely complete 2713.7 EUR while maintaining the 1800 EUR minimum.
+request_275,15884000,affordable_now,full_payment,2025-05-06:15884000,2025-05-06,none,Pay 15884000 IDR in full today. The selected plan keeps the forecast above the 12760100 IDR minimum.
