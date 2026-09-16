@@ -45,7 +45,8 @@ from evidence.deterministic import (  # noqa: E402
     run_prefilter,
 )
 from evidence.models import NormalizedFact, UnresolvedEvidence  # noqa: E402
-from evidence.resolver import build_context  # noqa: E402
+from evidence.image_input import UnsupportedImageError
+from evidence.resolver import build_context, build_image_context  # noqa: E402
 
 DEFAULT_DATASET_DIR = Path(__file__).resolve().parent.parent.parent / "dataset"
 DEFAULT_CACHE_PATH = Path(__file__).resolve().parent / "cache" / "evidence_cache.json"
@@ -71,18 +72,40 @@ def resolve_evidence_offline(dataset, indexes, cache_path: Path):
         for d in prefilter.by_bucket(bucket)
     ]
 
+    images_by_id = {i.image_id: i for i in dataset.images}
+
     cache_hits = 0
     offline_unresolved = 0
     images_deferred = 0
     for decision in prefilter.by_bucket(NEEDS_ESCALATION):
         if decision.ref.image_id is not None:
-            unresolved.append(
-                UnresolvedEvidence(
-                    provenance=decision.ref,
-                    reason="requires image interpretation (Stage 4d, not yet implemented)",
-                )
+            # Stage 4d exists now, but this script is deliberately OFFLINE -
+            # it never makes a model call. So an image resolves here only if
+            # a previously-validated fact is already in the cache; otherwise
+            # it stays unresolved, exactly like an uncached message.
+            image = images_by_id[decision.ref.image_id]
+            event = (
+                indexes.events_by_id.get(image.related_event_id)
+                if image.related_event_id else None
             )
-            images_deferred += 1
+            cached_image_fact = None
+            if event is not None:
+                try:
+                    image_ctx = build_image_context(image, event)
+                    cached_image_fact = cache.get_image(image_ctx)
+                except UnsupportedImageError:
+                    cached_image_fact = None
+            if cached_image_fact is not None:
+                facts.append(cached_image_fact)
+                cache_hits += 1
+            else:
+                unresolved.append(
+                    UnresolvedEvidence(
+                        provenance=decision.ref,
+                        reason="offline_experiment_no_cache_entry (image; no vision call attempted)",
+                    )
+                )
+                images_deferred += 1
             continue
         message = messages_by_id[decision.ref.message_id]
         ctx = build_context(message, indexes)

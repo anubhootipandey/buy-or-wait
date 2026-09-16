@@ -29,8 +29,16 @@ from typing import Optional
 from data.models import KNOWN_CURRENCIES
 
 from .models import EvidenceRef, NormalizedFact
-from .prompts import EvidenceContext
-from .schema import CLASSIFICATIONS, CONFIDENCE_LEVELS, CORRECTABLE_STATUSES, RESPONSE_FIELDS
+from .prompts import EvidenceContext, ImageEvidenceContext
+from .schema import (
+    CLASSIFICATIONS,
+    CONFIDENCE_LEVELS,
+    CORRECTABLE_STATUSES,
+    IMAGE_CLASSIFICATIONS,
+    IMAGE_DOCUMENT_TYPES,
+    IMAGE_RESPONSE_FIELDS,
+    RESPONSE_FIELDS,
+)
 
 
 class _Reject(Exception):
@@ -281,4 +289,165 @@ def _resolve_series_key(
     return key  # type: ignore[return-value]
 
 
-__all__ = ["ValidationResult", "validate_response"]
+# ---------------------------------------------------------------------------
+# Stage 4d: image response validation.
+# ---------------------------------------------------------------------------
+
+# An amount larger than this is refused outright as implausible for a
+# single consumer financial document, in ANY currency. Chosen generously
+# (a trillion) so that legitimately large low-denomination-currency
+# amounts - IDR, VND - are never wrongly rejected; the point is to catch
+# a misread that concatenated digits or swallowed a decimal point, not to
+# second-guess the dataset's own scale.
+MAX_PLAUSIBLE_IMAGE_AMOUNT = Decimal("1e12")
+
+# Amounts are money, not measurements: more than 2 decimal places means
+# the model has misread a separator (e.g. "1.234.56") rather than found a
+# genuinely sub-cent figure.
+MAX_IMAGE_AMOUNT_DECIMAL_PLACES = 2
+
+
+def _decimal_places(value: Decimal) -> int:
+    exponent = value.normalize().as_tuple().exponent
+    return -exponent if isinstance(exponent, int) and exponent < 0 else 0
+
+
+def validate_image_response(raw_text: str, ctx: ImageEvidenceContext) -> ValidationResult:
+    """Image-evidence twin of `validate_response`.
+
+    Same three outcomes and the same absolute refusal to repair, coerce,
+    or fill in anything the model got wrong. The two image-specific
+    checks are:
+
+      * amount grounding - an image has no source text to match a quote
+        against, so instead the model's own verbatim transcription
+        (`amount_text_as_shown`) is re-parsed by Python and must yield
+        the numeric `amount` it reported. This catches separator
+        misreads and digit concatenation, which are the realistic
+        failure modes for document OCR.
+      * currency authority - the fact's currency is ALWAYS the dataset
+        event's own currency. The model is never asked for a currency and
+        can never set one; `currency_as_shown` is recorded for audit and,
+        if it happens to be a real ISO code that contradicts the event,
+        is treated as a reason to reject rather than to overrule the
+        dataset.
+    """
+    try:
+        return _validate_image_response_inner(raw_text, ctx)
+    except _Reject as exc:
+        return ValidationResult(rejection_reason=str(exc))
+
+
+def _validate_image_response_inner(raw_text: str, ctx: ImageEvidenceContext) -> ValidationResult:
+    try:
+        parsed = json.loads(raw_text)
+    except json.JSONDecodeError as exc:
+        _reject(f"malformed JSON: {exc}")
+
+    if not isinstance(parsed, dict):
+        _reject(f"response is not a JSON object (got {type(parsed).__name__})")
+
+    missing = [f for f in IMAGE_RESPONSE_FIELDS if f not in parsed]
+    if missing:
+        _reject(f"missing required field(s): {sorted(missing)}")
+    unexpected = [k for k in parsed if k not in IMAGE_RESPONSE_FIELDS]
+    if unexpected:
+        # Notably this is what refuses a model-supplied "currency": the
+        # image contract has no such field, so offering one is invalid.
+        _reject(f"unexpected field(s): {sorted(unexpected)}")
+
+    evidence_id = parsed["evidence_id"]
+    if not isinstance(evidence_id, str) or evidence_id != ctx.image.image_id:
+        _reject(f"invalid evidence_id: expected {ctx.image.image_id!r}, got {evidence_id!r}")
+
+    classification = parsed["classification"]
+    if classification not in IMAGE_CLASSIFICATIONS:
+        _reject(f"unsupported classification: {classification!r}")
+
+    confidence = parsed["confidence"]
+    if confidence not in CONFIDENCE_LEVELS:
+        _reject(f"invalid confidence: {confidence!r}")
+
+    document_type = parsed["document_type"]
+    if document_type is not None and document_type not in IMAGE_DOCUMENT_TYPES:
+        _reject(f"invalid document_type: {document_type!r}")
+
+    # `currency_as_shown` is free-form (a symbol like "Rs." is fine and
+    # common), but if the model reports an exact ISO code that the system
+    # knows AND it contradicts the authoritative event currency, that is a
+    # genuine conflict - reject rather than silently overrule the dataset.
+    currency_as_shown = parsed["currency_as_shown"]
+    if currency_as_shown is not None and not isinstance(currency_as_shown, str):
+        _reject(f"invalid currency_as_shown: not a string ({currency_as_shown!r})")
+    if (
+        isinstance(currency_as_shown, str)
+        and currency_as_shown.strip().upper() in KNOWN_CURRENCIES
+        and currency_as_shown.strip().upper() != ctx.event.currency
+    ):
+        _reject(
+            f"document currency {currency_as_shown!r} contradicts the related "
+            f"event's own authoritative currency {ctx.event.currency!r}"
+        )
+
+    amount = _parse_optional_amount(parsed["amount"])
+    amount_text = parsed["amount_text_as_shown"]
+    amount_label = parsed["amount_label"]
+
+    if classification == "unresolved":
+        reason = parsed["negation_or_ambiguity_notes"] or "model classified image as unresolved"
+        return ValidationResult(unresolved_reason=reason)
+
+    if classification == "resolved_amount":
+        if ctx.event.amount is not None:
+            _reject("resolved_amount used on an event that already has a known amount")
+        if amount is None:
+            _reject("resolved_amount requires a non-null amount")
+        if not isinstance(amount_text, str) or not amount_text.strip():
+            _reject("resolved_amount requires a non-empty amount_text_as_shown")
+        if not isinstance(amount_label, str) or not amount_label.strip():
+            _reject("resolved_amount requires a non-empty amount_label")
+        if amount > MAX_PLAUSIBLE_IMAGE_AMOUNT:
+            _reject(
+                f"implausible amount: {amount} exceeds the "
+                f"{MAX_PLAUSIBLE_IMAGE_AMOUNT} ceiling for a single document"
+            )
+        if _decimal_places(amount) > MAX_IMAGE_AMOUNT_DECIMAL_PLACES:
+            _reject(
+                f"implausible amount: {amount} has more than "
+                f"{MAX_IMAGE_AMOUNT_DECIMAL_PLACES} decimal places"
+            )
+        if not _amount_is_grounded(amount_text, amount):
+            _reject(
+                f"ungrounded amount: {amount} does not match the model's own "
+                f"transcription of the document ({amount_text!r})"
+            )
+    else:
+        # no_fact: must not smuggle an amount through an inert result.
+        if amount is not None:
+            _reject(f"classification {classification!r} must not carry an amount")
+
+    provenance = EvidenceRef(
+        user_id=ctx.image.user_id,
+        image_id=ctx.image.image_id,
+        request_id=ctx.image.request_id,
+        related_event_id=ctx.image.related_event_id,
+    )
+
+    fact = NormalizedFact(
+        fact_id=f"fact:{ctx.image.image_id}:{classification}",
+        user_id=ctx.image.user_id,
+        fact_type=classification,
+        provenance=provenance,
+        target_event_id=ctx.event.event_id,
+        resolved_amount=amount,
+        # The dataset's event currency is authoritative, always. The model
+        # is never consulted for this value.
+        currency=ctx.event.currency if amount is not None else None,
+        resolution_method="gemini",
+        confidence=confidence,
+        raw_model_output=parsed,
+    )
+    return ValidationResult(fact=fact)
+
+
+__all__ = ["ValidationResult", "validate_response", "validate_image_response"]

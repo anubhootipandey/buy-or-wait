@@ -46,3 +46,6 @@ dist/
 # Temporary files
 *.tmp
 *.temp
+
+# Generated evidence cache
+code/evidence/cache/evidence_cache.json

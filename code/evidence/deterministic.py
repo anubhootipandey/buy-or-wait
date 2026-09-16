@@ -273,9 +273,11 @@ def classify_image(
         return PrefilterDecision(ref, NO_FACT, "related event already has a known amount", fact)
 
     # Blank amount, image present on disk - genuinely requires visual
-    # interpretation. Stage 4a never attempts OCR/vision.
+    # interpretation. Stage 4a itself never attempts OCR/vision; it only
+    # decides that vision is warranted. `resolver.resolve_image_with_ai`
+    # (Stage 4d) is what actually reads the document.
     return PrefilterDecision(
-        ref, NEEDS_ESCALATION, "blank-amount event; requires image interpretation (Stage 4d)"
+        ref, NEEDS_ESCALATION, "blank-amount event; requires image interpretation (Stage 4d vision resolver)"
     )
 
 

@@ -30,7 +30,7 @@ from __future__ import annotations
 import os
 from typing import Protocol
 
-from .schema import RESPONSE_JSON_SCHEMA
+from .schema import IMAGE_RESPONSE_JSON_SCHEMA, RESPONSE_JSON_SCHEMA
 
 DEFAULT_MODEL_ID = "gemini-3.1-flash-lite"
 
@@ -42,6 +42,25 @@ class AIClient(Protocol):
         that's the caller's responsibility (see resolver.py), because
         only the caller knows how to build a materially better retry
         prompt."""
+        ...
+
+    def complete_with_image(
+        self,
+        system_instructions: str,
+        user_prompt: str,
+        image_bytes: bytes,
+        mime_type: str,
+    ) -> str:
+        """Return the raw text of the model's structured-output response
+        for one IMAGE plus its text prompt (Stage 4d).
+
+        Kept as a separate method rather than an optional argument on
+        `complete` so that the text and image paths are constrained by
+        their own distinct response schemas, and so an existing
+        text-only client implementation stays valid. Callers must treat
+        this method as optional (`hasattr`) and fail safe to unresolved
+        when a client does not provide it - see `resolver.py`.
+        """
         ...
 
 
@@ -89,6 +108,45 @@ class GeminiAIClient:
         text = response.text
         if text is None:
             raise RuntimeError(f"Gemini returned no text content (finish_reason may indicate why): {response!r}")
+        return text
+
+    def complete_with_image(
+        self,
+        system_instructions: str,
+        user_prompt: str,
+        image_bytes: bytes,
+        mime_type: str,
+    ) -> str:
+        """Stage 4d multimodal call.
+
+        Uses the same model, the same temperature=0.0 determinism, and
+        the same native structured-output mechanism as `complete` - only
+        the payload (an inline image part alongside the text part) and
+        the response schema differ. No extra provider, no OCR service,
+        no additional dependency: `google-genai` is already required for
+        the text path and is natively multimodal.
+
+        The image is sent inline as bytes with its ACTUAL sniffed MIME
+        type (see `image_input.load_image`); nothing is uploaded, stored,
+        or retained anywhere by this client.
+        """
+        image_part = self._types.Part.from_bytes(data=image_bytes, mime_type=mime_type)
+        response = self._client.models.generate_content(
+            model=self.model_id,
+            contents=[image_part, user_prompt],
+            config=self._types.GenerateContentConfig(
+                system_instruction=system_instructions,
+                response_mime_type="application/json",
+                response_json_schema=IMAGE_RESPONSE_JSON_SCHEMA,
+                temperature=0.0,
+            ),
+        )
+        text = response.text
+        if text is None:
+            raise RuntimeError(
+                f"Gemini returned no text content for image evidence "
+                f"(finish_reason may indicate why): {response!r}"
+            )
         return text
 
 

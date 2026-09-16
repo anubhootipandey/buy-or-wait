@@ -27,7 +27,7 @@ from pathlib import Path
 from typing import Optional
 
 from .models import EvidenceRef, NormalizedFact
-from .prompts import EvidenceContext
+from .prompts import EvidenceContext, ImageEvidenceContext
 
 
 def _cache_key(ctx: EvidenceContext) -> str:
@@ -39,6 +39,35 @@ def _cache_key(ctx: EvidenceContext) -> str:
         parts += ["standalone", ",".join("/".join(k) for k in ctx.known_series_categories)]
     digest = hashlib.sha256("\x1f".join(parts).encode("utf-8")).hexdigest()[:16]
     return f"{ctx.message.message_id}:{digest}"
+
+
+def _image_cache_key(ctx: ImageEvidenceContext) -> str:
+    """Cache key for one image's resolved fact.
+
+    Keyed on the image's CONTENT hash rather than its filename/id, plus
+    the same event snapshot the text cache uses. Two consequences that
+    are correctness properties, not optimizations:
+
+      * two different images can never collide, even if a file is
+        replaced in place under the same `image_id`/path - the hash
+        changes, so the stale entry is simply never found again;
+      * the same image attached to a different event (or to an event
+        whose amount/status/currency has since changed) is re-resolved
+        rather than served a fact that was grounded against different
+        context.
+    """
+    e = ctx.event
+    parts = [
+        ctx.image.image_id,
+        ctx.payload.sha256,
+        ctx.payload.mime_type,
+        e.event_id,
+        str(e.amount),
+        e.currency,
+        e.status,
+    ]
+    digest = hashlib.sha256("\x1f".join(parts).encode("utf-8")).hexdigest()[:16]
+    return f"{ctx.image.image_id}:{digest}"
 
 
 def _fact_to_json(fact: NormalizedFact) -> dict:
@@ -108,6 +137,27 @@ class EvidenceCache:
 
     def set(self, ctx: EvidenceContext, fact: NormalizedFact) -> None:
         self._store[_cache_key(ctx)] = _fact_to_json(fact)
+
+    def get_image(self, ctx: ImageEvidenceContext) -> Optional[NormalizedFact]:
+        entry = self._store.get(_image_cache_key(ctx))
+        if entry is None:
+            return None
+        return _fact_from_json(entry)
+
+    def set_image(self, ctx: ImageEvidenceContext, fact: NormalizedFact) -> None:
+        self._store[_image_cache_key(ctx)] = _fact_to_json(fact)
+
+    def all_facts(self) -> list[NormalizedFact]:
+        """Every successfully-validated fact currently in the cache,
+        deserialized. Order is stable (sorted by cache key) so a
+        downstream run is never dependent on dict insertion order.
+
+        Only successful facts are ever stored (see the module docstring),
+        so everything returned here has already passed strict validation -
+        this is the supported way for the production pipeline to consume
+        previously-resolved evidence without re-spending API quota.
+        """
+        return [_fact_from_json(self._store[key]) for key in sorted(self._store)]
 
     def __len__(self) -> int:
         return len(self._store)

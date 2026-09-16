@@ -16,7 +16,17 @@ does NOT decide amount_safe_to_pay or any other planner output.
 Stage 3 scope (`plan` subcommand): run the deterministic affordability +
 payment planner for a request - full/partial/installment/wait candidates,
 ranked per the challenge's explicit rule order, plus any spending changes
-needed. Still an INTERNAL decision object; does NOT write output.csv.
+needed. An INTERNAL decision object; does not write output.csv.
+
+Stage 4 scope (`run` subcommand): the PRODUCTION entry point. Runs the
+full pipeline - dataset, validated evidence facts, resolved amounts
+applied to blank events, reconciliation, 90-day forecast (with Stage 4c
+series amendments), Stage 3 planner - and writes output.csv.
+
+Evidence is read from the on-disk evidence cache by default, so every
+command here runs fully offline with no API key and no network. Live
+model resolution is opt-in via `run --resolve-evidence`, and is the only
+path that ever constructs a model client or spends API quota.
 
 Usage:
     python3 code/main.py [--dataset-dir PATH]
@@ -24,6 +34,12 @@ Usage:
     python3 code/main.py forecast --all [--dataset-dir PATH]
     python3 code/main.py plan --request-id REQUEST_ID [--dataset-dir PATH]
     python3 code/main.py plan --all [--dataset-dir PATH]
+    python3 code/main.py run [--output PATH] [--evidence-cache PATH]
+    python3 code/main.py run --no-evidence        # structured data only
+    python3 code/main.py run --resolve-evidence   # live model resolution
+
+Every subcommand accepts --no-evidence to reproduce the pre-evidence
+(structured-data-only) behavior for comparison.
 
 By default, --dataset-dir resolves to <repo_root>/dataset, where repo_root
 is the parent of the directory this file lives in.
@@ -45,6 +61,8 @@ from engine.forecast import build_forecast
 from engine.reconciliation import reconcile_user_events
 
 from planner import plan_request
+
+import pipeline
 
 
 def default_dataset_dir() -> Path:
@@ -73,7 +91,9 @@ def _run_validate(dataset_dir: Path) -> int:
         return 1
 
 
-def _forecast_one(request_id: str, dataset, indexes, *, verbose: bool) -> dict:
+def _forecast_one(
+    request_id: str, dataset, indexes, *, verbose: bool, evidence_facts: tuple = ()
+) -> dict:
     request = indexes.requests_by_id.get(request_id)
     if request is None:
         raise SystemExit(f"ERROR: request_id {request_id!r} not found in requests.csv")
@@ -89,6 +109,7 @@ def _forecast_one(request_id: str, dataset, indexes, *, verbose: bool) -> dict:
         state,
         starting_balance=profile.current_available_balance,
         minimum_balance_to_keep=profile.minimum_balance_to_keep,
+        evidence_facts=evidence_facts,
     )
 
     if verbose:
@@ -123,9 +144,15 @@ def _forecast_one(request_id: str, dataset, indexes, *, verbose: bool) -> dict:
     }
 
 
-def _run_forecast(dataset_dir: Path, request_id: str | None, run_all: bool) -> int:
-    dataset = load_dataset(dataset_dir)
-    indexes = build_indexes(dataset)
+def _run_forecast(
+    dataset_dir: Path, request_id: str | None, run_all: bool,
+    *, use_evidence: bool = True, cache_path: Path | None = None,
+) -> int:
+    prepared = pipeline.load_and_prepare(
+        dataset_dir, cache_path=cache_path, use_evidence=use_evidence
+    )
+    dataset, indexes = prepared.dataset, prepared.indexes
+    _print_evidence_banner(prepared, use_evidence)
 
     if run_all:
         total_series = 0
@@ -133,7 +160,10 @@ def _run_forecast(dataset_dir: Path, request_id: str | None, run_all: bool) -> i
         total_unresolved = 0
         total_breaches = 0
         for request in dataset.requests:
-            summary = _forecast_one(request.request_id, dataset, indexes, verbose=False)
+            summary = _forecast_one(
+                request.request_id, dataset, indexes, verbose=False,
+                evidence_facts=prepared.facts_for(request.user_id),
+            )
             total_series += summary["recurring_series_count"]
             total_duplicates += summary["excluded_duplicate_count"]
             total_unresolved += summary["unresolved_blank_count"]
@@ -150,17 +180,21 @@ def _run_forecast(dataset_dir: Path, request_id: str | None, run_all: bool) -> i
         print("ERROR: forecast requires either --request-id or --all", file=sys.stderr)
         return 2
 
-    _forecast_one(request_id, dataset, indexes, verbose=True)
+    request = indexes.requests_by_id.get(request_id)
+    facts = prepared.facts_for(request.user_id) if request is not None else ()
+    _forecast_one(request_id, dataset, indexes, verbose=True, evidence_facts=facts)
     return 0
 
 
-def _plan_one(request_id: str, dataset, indexes, *, verbose: bool) -> dict:
+def _plan_one(
+    request_id: str, dataset, indexes, *, verbose: bool, evidence_facts: tuple = ()
+) -> dict:
     request = indexes.requests_by_id.get(request_id)
     if request is None:
         raise SystemExit(f"ERROR: request_id {request_id!r} not found in requests.csv")
 
     profile = indexes.profiles_by_user[request.user_id]
-    result = plan_request(request, profile, dataset, indexes)
+    result = plan_request(request, profile, dataset, indexes, evidence_facts=evidence_facts)
 
     if verbose:
         print(f"\n=== {request_id} (user={request.user_id}, "
@@ -185,9 +219,15 @@ def _plan_one(request_id: str, dataset, indexes, *, verbose: bool) -> dict:
     }
 
 
-def _run_plan(dataset_dir: Path, request_id: str | None, run_all: bool) -> int:
-    dataset = load_dataset(dataset_dir)
-    indexes = build_indexes(dataset)
+def _run_plan(
+    dataset_dir: Path, request_id: str | None, run_all: bool,
+    *, use_evidence: bool = True, cache_path: Path | None = None,
+) -> int:
+    prepared = pipeline.load_and_prepare(
+        dataset_dir, cache_path=cache_path, use_evidence=use_evidence
+    )
+    dataset, indexes = prepared.dataset, prepared.indexes
+    _print_evidence_banner(prepared, use_evidence)
 
     if run_all:
         counts = {
@@ -196,7 +236,10 @@ def _run_plan(dataset_dir: Path, request_id: str | None, run_all: bool) -> int:
         }
         with_spending_changes = 0
         for request in dataset.requests:
-            summary = _plan_one(request.request_id, dataset, indexes, verbose=False)
+            summary = _plan_one(
+                request.request_id, dataset, indexes, verbose=False,
+                evidence_facts=prepared.facts_for(request.user_id),
+            )
             counts[summary["affordability_status"]] = counts.get(summary["affordability_status"], 0) + 1
             if summary["uses_spending_changes"]:
                 with_spending_changes += 1
@@ -210,12 +253,72 @@ def _run_plan(dataset_dir: Path, request_id: str | None, run_all: bool) -> int:
         print("ERROR: plan requires either --request-id or --all", file=sys.stderr)
         return 2
 
-    _plan_one(request_id, dataset, indexes, verbose=True)
+    request = indexes.requests_by_id.get(request_id)
+    facts = prepared.facts_for(request.user_id) if request is not None else ()
+    _plan_one(request_id, dataset, indexes, verbose=True, evidence_facts=facts)
+    return 0
+
+def _print_evidence_banner(prepared, use_evidence: bool) -> None:
+    """One line describing what evidence actually reached the engine, so a
+    run is never ambiguous about whether facts were applied."""
+    if not use_evidence:
+        print("Evidence: DISABLED (--no-evidence) - structured dataset only")
+        return
+    report = prepared.apply_report
+    print(
+        f"Evidence: {prepared.total_facts} validated fact(s); "
+        f"{len(report.applied)} blank amount(s) filled "
+        f"({prepared.image_derived_count} image-derived); "
+        f"{len(prepared.facts_by_user)} user(s) with series-level facts"
+    )
+    for skipped in report.skipped:
+        print(f"  skipped {skipped.fact_id}: {skipped.reason}")
+
+
+def _run_production(
+    dataset_dir: Path,
+    output_path: Path | None,
+    *,
+    use_evidence: bool = True,
+    cache_path: Path | None = None,
+    resolve_live: bool = False,
+) -> int:
+    """Stage 4 production run: full pipeline -> output.csv.
+
+    Delegates entirely to `pipeline`, which `final_submission.py` also
+    uses, so the CLI and the submission runner can never diverge.
+    """
+    print(f"Loading dataset from: {dataset_dir}")
+    if resolve_live:
+        print("Evidence: resolving LIVE via the model (consumes API quota)...")
+
+    try:
+        prepared = pipeline.load_and_prepare(
+            dataset_dir,
+            cache_path=cache_path,
+            use_evidence=use_evidence,
+            resolve_live=resolve_live,
+        )
+    except RuntimeError as exc:
+        # Raised by GeminiAIClient when the SDK or GEMINI_API_KEY is absent.
+        print(f"ERROR: live evidence resolution unavailable: {exc}", file=sys.stderr)
+        print(
+            "Re-run without --resolve-evidence to use the cached evidence facts.",
+            file=sys.stderr,
+        )
+        return 2
+
+    _print_evidence_banner(prepared, use_evidence)
+
+    rows = pipeline.plan_all(prepared)
+    out = pipeline.write_output_csv(rows, output_path)
+
+    print(f"Wrote {len(rows)} predictions to {out}")
     return 0
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Buy or Wait? - Stage 1/2 CLI")
+    parser = argparse.ArgumentParser(description="Buy or Wait? - CLI and production entry point")
     parser.add_argument(
         "--dataset-dir",
         type=Path,
@@ -242,6 +345,32 @@ def main(argv: list[str] | None = None) -> int:
         "--all", action="store_true", help="Run for every request in requests.csv and print aggregate counts"
     )
 
+    run_parser = subparsers.add_parser(
+        "run", help="Stage 4 production run: full pipeline -> output.csv"
+    )
+    run_parser.add_argument(
+        "--output", type=Path, default=None,
+        help="Where to write predictions (default: <repo_root>/output.csv)",
+    )
+    run_parser.add_argument(
+        "--resolve-evidence", action="store_true",
+        help="Resolve evidence live via the model instead of using the cache "
+             "(requires google-genai and GEMINI_API_KEY; consumes quota)",
+    )
+
+    # Shared evidence flags - every subcommand can turn evidence off or
+    # point at a different cache, so runs stay comparable and offline.
+    for sub in (forecast_parser, plan_parser, run_parser):
+        sub.add_argument(
+            "--no-evidence", action="store_true",
+            help="Ignore evidence facts entirely (structured dataset only)",
+        )
+        sub.add_argument(
+            "--evidence-cache", type=Path, default=None,
+            help="Path to the evidence cache JSON "
+                 "(default: code/evidence/cache/evidence_cache.json)",
+        )
+
     args = parser.parse_args(argv)
 
     dataset_dir = getattr(args, "dataset_dir", None) or default_dataset_dir()
@@ -249,11 +378,27 @@ def main(argv: list[str] | None = None) -> int:
         print(f"ERROR: dataset directory not found: {dataset_dir}", file=sys.stderr)
         return 2
 
+    use_evidence = not getattr(args, "no_evidence", False)
+    cache_path = getattr(args, "evidence_cache", None)
+
     if args.command == "forecast":
-        return _run_forecast(dataset_dir, args.request_id, args.all)
+        return _run_forecast(
+            dataset_dir, args.request_id, args.all,
+            use_evidence=use_evidence, cache_path=cache_path,
+        )
 
     if args.command == "plan":
-        return _run_plan(dataset_dir, args.request_id, args.all)
+        return _run_plan(
+            dataset_dir, args.request_id, args.all,
+            use_evidence=use_evidence, cache_path=cache_path,
+        )
+
+    if args.command == "run":
+        return _run_production(
+            dataset_dir, args.output,
+            use_evidence=use_evidence, cache_path=cache_path,
+            resolve_live=args.resolve_evidence,
+        )
 
     return _run_validate(dataset_dir)
 

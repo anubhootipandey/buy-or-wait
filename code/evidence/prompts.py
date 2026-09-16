@@ -16,9 +16,10 @@ from __future__ import annotations
 from dataclasses import dataclass
 from typing import Optional
 
-from data.models import FinancialEvent, Message
+from data.models import FinancialEvent, ImageRecord, Message
 
-from .schema import CLASSIFICATIONS, CORRECTABLE_STATUSES
+from .image_input import ImagePayload
+from .schema import CLASSIFICATIONS, CORRECTABLE_STATUSES, IMAGE_DOCUMENT_TYPES
 
 SYSTEM_INSTRUCTIONS = """\
 You are a strict evidence-interpretation component inside a deterministic \
@@ -168,8 +169,143 @@ def build_retry_prompt(ctx: EvidenceContext, previous_raw_output: str, rejection
     return base_system, base_user + correction
 
 
+# ---------------------------------------------------------------------------
+# Stage 4d: image evidence prompts.
+# ---------------------------------------------------------------------------
+
+IMAGE_SYSTEM_INSTRUCTIONS = """\
+You are a strict document-reading component inside a deterministic \
+personal-finance planner. You are shown ONE image of a financial document \
+(a receipt, invoice, payslip, bill, or similar) that is attached to ONE \
+financial event whose amount is currently unknown to the system. Your only \
+job is to read the single amount that this document establishes for that \
+event. You never make the financial decision - a separate Python system \
+does all financial math, forecasting, and safety checks.
+
+Rules you must follow exactly:
+1. Read ONLY what is visibly printed or written in the image. Never infer, \
+compute, convert, or estimate an amount that is not shown. Never use \
+outside knowledge about the merchant, employer, or document shown.
+2. Return the amount that represents what this event actually costs or \
+pays the user - the settlement figure, not a historical or informational \
+one. Prefer, in order: an explicitly outstanding figure ("Balance Due", \
+"Amount Payable", "Amount Due"), then the final settled figure ("Grand \
+Total", "Total Paid", "Total Amount Received", "Net Pay"), then a plain \
+"Total". If a document shows BOTH a larger historical total AND a smaller \
+outstanding balance, the outstanding balance is the answer.
+3. Do NOT return a subtotal, a line item, a tax line, a previous balance, \
+a credit limit, an account number, a date, or a loyalty-points figure as \
+the amount.
+4. `amount_text_as_shown` MUST be the amount transcribed EXACTLY as it \
+appears in the document, including its thousands separators and decimal \
+point (for example "8,528.10" or "1 00 000"). Do not reformat it, do not \
+strip separators, do not round. This transcription is checked against the \
+numeric `amount` you return - if they disagree, your response is rejected.
+5. `amount` MUST be the same number as `amount_text_as_shown`, expressed \
+as a plain JSON number with no separators (for example 8528.10).
+6. `amount_label` MUST be the label printed next to that amount in the \
+document (for example "Grand Total", "Balance Due", "Net Pay"). If the \
+amount genuinely has no printed label, describe its position in a few \
+words (for example "handwritten figure at foot of note").
+7. `currency_as_shown` is ONLY a record of what symbol or code the \
+document displays (for example "Rs.", "INR", "$"). It is NOT used as the \
+event's currency - the system already knows the correct currency and will \
+use its own. Never try to change it. Report null if nothing is shown.
+8. If the image is unreadable, ambiguous between multiple plausible \
+settlement amounts, shows no amount at all, or is not a financial \
+document, use classification="unresolved" and explain why in \
+`negation_or_ambiguity_notes`. Returning "unresolved" is ALWAYS safer \
+than guessing - a wrong amount corrupts a real financial forecast.
+9. Use classification="no_fact" only when the document is genuinely inert \
+for this event (for example it merely corroborates something with no \
+amount to extract).
+10. Return ONLY the fields defined by the schema you were given. Do not \
+add commentary outside the structured response.
+
+Valid `classification` values:
+- "resolved_amount": the document establishes this event's amount. \
+  Requires `amount`, `amount_text_as_shown`, and `amount_label`.
+- "no_fact": document considered, nothing actionable to extract.
+- "unresolved": you cannot safely read or decide this document.
+"""
+
+
+@dataclass(frozen=True)
+class ImageEvidenceContext:
+    """Everything about an image and the single event it is attached to
+    that the model is allowed to see. As with `EvidenceContext`, it never
+    carries another user's data or an unrelated event."""
+
+    image: ImageRecord
+    event: FinancialEvent
+    payload: ImagePayload
+
+    @property
+    def evidence_id(self) -> str:
+        return self.image.image_id
+
+
+def _image_event_context_block(ctx: ImageEvidenceContext) -> str:
+    e = ctx.event
+    return (
+        "This image is attached to exactly one financial-event record whose "
+        "amount is currently BLANK. The record is given here for grounding "
+        "only - do not restate it as if you discovered it:\n"
+        f"  event_id={e.event_id!r}\n"
+        f"  event_type={e.event_type!r}\n"
+        f"  category={e.category!r}\n"
+        f"  direction={e.direction!r}\n"
+        f"  amount=<blank - this is what you are reading from the image>\n"
+        f"  currency={e.currency!r}  (AUTHORITATIVE - the system uses this, "
+        "not anything the document displays)\n"
+        f"  status={e.status!r}\n"
+        f"  event_date={e.event_date.isoformat()}\n"
+    )
+
+
+def build_image_prompt(ctx: ImageEvidenceContext) -> tuple[str, str]:
+    """Return (system_instructions, user_prompt) for the first attempt at
+    one image. The image bytes themselves are passed separately by the
+    client (see `AIClient.complete_with_image`) - this builds only text."""
+    doc_types = ", ".join(repr(t) for t in IMAGE_DOCUMENT_TYPES)
+    user_prompt = (
+        f"evidence_id: {ctx.image.image_id}\n"
+        f"image media type: {ctx.payload.mime_type}\n\n"
+        f"{_image_event_context_block(ctx)}\n"
+        "The document image is attached to this request. Read it and report "
+        "the single amount it establishes for the event above.\n"
+        f"`document_type` must be one of: {doc_types}.\n\n"
+        f"Respond with evidence_id exactly equal to {ctx.image.image_id!r}."
+    )
+    return IMAGE_SYSTEM_INSTRUCTIONS, user_prompt
+
+
+def build_image_retry_prompt(
+    ctx: ImageEvidenceContext, previous_raw_output: str, rejection_reason: str
+) -> tuple[str, str]:
+    """Return the single allowed corrective retry prompt for one image -
+    same policy and same reasoning as `build_retry_prompt` for text."""
+    base_system, base_user = build_image_prompt(ctx)
+    correction = (
+        "\n\nYour previous response was REJECTED by strict validation and will "
+        "never be accepted again in this form. Fix it.\n"
+        f"Your previous response was:\n{previous_raw_output}\n\n"
+        f"Rejection reason: {rejection_reason}\n\n"
+        "Re-read the rules above and look at the image again. Return a "
+        "corrected response that fixes exactly this problem. If you cannot "
+        "produce a response that would pass, use classification=\"unresolved\" "
+        "and explain why in negation_or_ambiguity_notes instead of repeating "
+        "the same mistake."
+    )
+    return base_system, base_user + correction
+
+
 __all__ = [
     "SYSTEM_INSTRUCTIONS",
+    "IMAGE_SYSTEM_INSTRUCTIONS",
+    "ImageEvidenceContext",
+    "build_image_prompt",
+    "build_image_retry_prompt",
     "EvidenceContext",
     "build_prompt",
     "build_retry_prompt",

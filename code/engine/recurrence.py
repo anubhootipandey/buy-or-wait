@@ -221,6 +221,10 @@ def project_series(series: RecurringSeries, window_start: date, window_end: date
                     source="recurring",
                     event_id=None,
                     series_key=(series.key.category, series.key.event_type, series.key.direction),
+                    # Same identity mechanism `engine/forecast.py` already
+                    # uses to key `per_series_generated` (id(series)) - see
+                    # `CashEvent.series_instance_id`'s docstring.
+                    series_instance_id=id(series),
                 )
             )
         next_date = _step(next_date)

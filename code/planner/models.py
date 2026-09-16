@@ -12,6 +12,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import date
 from decimal import Decimal
+from typing import Optional
 
 
 @dataclass(frozen=True)
@@ -30,6 +31,13 @@ class SpendingChangeAction:
     original_amount: Decimal
     adjusted_amount: Decimal  # 0 for "stop"
     severity: int  # 0 = reduce (gentler), 1 = stop (more disruptive) - search order only
+    # Identity of the exact `RecurringSeries` object this action was built
+    # from (id(series) - see `CashEvent.series_instance_id`). Lets
+    # `apply_changes_to_forecast` target exactly the series the action was
+    # generated for, even when another series shares the same series_key
+    # (an alternating-series split, Rule 9). None only for actions built
+    # directly outside `eligible_series_actions` (e.g. hand-written tests).
+    series_instance_id: Optional[int] = None
 
     @property
     def reduction_amount(self) -> Decimal:

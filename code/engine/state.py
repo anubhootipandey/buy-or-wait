@@ -47,6 +47,16 @@ class CashEvent:
     source: str  # EventSource value
     event_id: Optional[str] = None  # None only for source == "recurring"
     series_key: Optional[tuple] = None  # set for recurring-related events
+    # Identity of the exact `RecurringSeries` OBJECT that generated this
+    # occurrence (via `id(series)`, the same mechanism `engine/forecast.py`
+    # already uses to key `per_series_generated` for Stage 4c). Unlike
+    # `series_key`, this survives Rule 9's alternating-series split: two
+    # split halves share one `series_key` but never share this value, so
+    # downstream code can target exactly one physical series rather than
+    # guessing between two that look identical by category/type/direction.
+    # Set only by `recurrence.project_series`; always None for
+    # source in ("settled", "known_future"), which have no series object.
+    series_instance_id: Optional[int] = None
 
     @property
     def signed_amount(self) -> Decimal:
